@@ -1,4 +1,4 @@
-program projectVisualtecProva;
+program projectCadastroSimples;
 
 uses
   Vcl.Forms,

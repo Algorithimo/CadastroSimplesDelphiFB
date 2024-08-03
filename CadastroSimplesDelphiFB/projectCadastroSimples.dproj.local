@@ -4,14 +4,14 @@
     <Transaction>2024/06/14 15:43:54.000.951,=C:\Users\souza\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2024/07/25 12:11:43.000.063,=C:\Users\souza\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2024/07/25 12:14:41.000.025,=C:\Users\souza\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2024/07/25 12:14:53.000.303,C:\Users\souza\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas=E:\Programação\VisualTec - Prova\src\Tela\unitMain.pas</Transaction>
     <Transaction>2024/07/25 12:14:53.000.303,C:\Users\souza\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.dfm=E:\Programação\VisualTec - Prova\src\Tela\unitMain.dfm</Transaction>
+    <Transaction>2024/07/25 12:14:53.000.303,C:\Users\souza\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas=E:\Programação\VisualTec - Prova\src\Tela\unitMain.pas</Transaction>
     <Transaction>2024/07/25 12:15:14.000.735,C:\Users\souza\OneDrive\Documentos\Embarcadero\Studio\Projects\Project1.dproj=E:\Programação\VisualTec - Prova\projectVisualtecProva.dproj</Transaction>
     <Transaction>2024/07/25 15:24:51.000.638,=E:\Programação\VisualTec - Prova\Unit1.pas</Transaction>
-    <Transaction>2024/07/25 15:25:38.000.535,E:\Programação\VisualTec - Prova\Unit1.pas=E:\Programação\VisualTec - Prova\src\Services\UnitDBconexao.pas</Transaction>
     <Transaction>2024/07/25 15:25:38.000.535,E:\Programação\VisualTec - Prova\Unit1.dfm=E:\Programação\VisualTec - Prova\src\Services\UnitDBconexao.dfm</Transaction>
-    <Transaction>2024/07/26 20:20:37.000.117,E:\Programacao\VisualTecProva\src\Services\DataService_Impl.dfm=E:\Programacao\VisualTecProva\src\Services\UnitDBconexao.dfm</Transaction>
+    <Transaction>2024/07/25 15:25:38.000.535,E:\Programação\VisualTec - Prova\Unit1.pas=E:\Programação\VisualTec - Prova\src\Services\UnitDBconexao.pas</Transaction>
     <Transaction>2024/07/26 20:20:37.000.117,E:\Programacao\VisualTecProva\src\Services\DataService_Impl.pas=E:\Programacao\VisualTecProva\src\Services\UnitDBconexao.pas</Transaction>
+    <Transaction>2024/07/26 20:20:37.000.117,E:\Programacao\VisualTecProva\src\Services\DataService_Impl.dfm=E:\Programacao\VisualTecProva\src\Services\UnitDBconexao.dfm</Transaction>
     <Transaction>2024/07/26 20:21:33.000.709,E:\Programacao\VisualTecProva\src\Tela\Main.pas=E:\Programacao\VisualTecProva\src\Tela\unitMain.pas</Transaction>
     <Transaction>2024/07/26 20:21:33.000.709,E:\Programacao\VisualTecProva\src\Tela\Main.dfm=E:\Programacao\VisualTecProva\src\Tela\unitMain.dfm</Transaction>
     <Transaction>2024/07/27 15:08:47.000.489,=E:\Programacao\VisualTecProva\Unit1.pas</Transaction>
@@ -19,6 +19,7 @@
     <Transaction>2024/07/27 15:10:49.000.469,=E:\Programacao\VisualTecProva\Unit1.pas</Transaction>
     <Transaction>2024/07/27 15:11:20.000.218,E:\Programacao\VisualTecProva\src\Tela\Cadastro2.dfm=E:\Programacao\VisualTecProva\Unit1.dfm</Transaction>
     <Transaction>2024/07/27 15:11:20.000.218,E:\Programacao\VisualTecProva\src\Tela\Cadastro2.pas=E:\Programacao\VisualTecProva\Unit1.pas</Transaction>
+    <Transaction>2024/08/02 21:24:30.000.205,E:\Programacao\VisualTecProva\projectVisualtecProva.dproj=E:\Programacao\VisualTecProva\projectCadastroSimples.dproj</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="src"/>
