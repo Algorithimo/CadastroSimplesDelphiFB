@@ -1,0 +1,87 @@
+unit DataService_Impl;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
+  FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, FireDAC.Phys.IBBase, FireDAC.Comp.UI,
+  Data.DB, FireDAC.Comp.Client, System.IniFiles, FireDAC.Stan.Param,
+  FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet;
+
+type
+  TDataService = class(TDataModule)
+    FDConnection: TFDConnection;
+    FDGUIxWaitCursor: TFDGUIxWaitCursor;
+    FDPhysFBDriverLink: TFDPhysFBDriverLink;
+    qryPessoa: TFDQuery;
+    dsPessoa: TDataSource;
+    qryEndereco: TFDQuery;
+    qryPessoaID_PESSOA: TLargeintField;
+    qryPessoaIND_TIPO_PESSOA: TStringField;
+    qryPessoaNUM_CPF_CNPJ: TStringField;
+    qryPessoaNOM_PESSOA: TStringField;
+    qryEnderecoID_ENDERECO: TLargeintField;
+    qryEnderecoID_PESSOA: TLargeintField;
+    qryEnderecoNUM_CEP: TStringField;
+    qryEnderecoNUM_ENDERECO: TStringField;
+    qryEnderecoNOM_ENDERECO: TStringField;
+    qryEnderecoNOM_BAIRRO: TStringField;
+    qryEnderecoNOM_MUNICIPIO: TStringField;
+    qryEnderecoCOD_UF: TStringField;
+    qryEnderecoTXT_COMPLEMENTO: TStringField;
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DataService: TDataService;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+procedure TDataService.DataModuleCreate(Sender: TObject);
+var
+    varIniFile : TIniFile;
+    varDataBase : String;
+    varUsername : String;
+    varPassword : String;
+    varServidor : String;
+    varCaminho  : String;
+    varPorta : Integer;
+begin
+    try
+      FDConnection.Connected := false;
+
+      varCaminho := ExtractFileDir(ParamStr(0)) + '\Login.ini';
+      // FDPhysFBDriverLink.VendorHome := ExtractFileDir(ParamStr(0)) + 'dlls';
+
+      varIniFile := TIniFile.Create(varCaminho);
+
+      varDataBase := varIniFile.ReadString('Conexao', 'Database', varDataBase);
+      varServidor := varIniFile.ReadString('Conexao', 'Servidor', varServidor);
+      varPorta := varIniFile.ReadInteger('Conexao', 'Porta', varPorta);
+
+      varUsername := 'SYSDBA';
+      varPassword := 'masterkey';
+
+      FDConnection.Params.Values['Database']  := varDataBase;
+      FDConnection.Params.Values['Servidor']  := varServidor;
+      FDConnection.Params.Values['Porta']  := varPorta.ToString;
+      FDConnection.Params.Values['User_Name']  := varUsername;
+      FDConnection.Params.Values['Passowrd']  := varPassword;
+    finally
+
+    FreeAndNil(varIniFile);
+
+    end;
+end;
+
+end.

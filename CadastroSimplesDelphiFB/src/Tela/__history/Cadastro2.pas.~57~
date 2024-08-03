@@ -1,0 +1,893 @@
+unit Cadastro2;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.WinXPanels, Vcl.WinXCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.Mask,
+  Vcl.DBCtrls, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
+  dxSkinsCore, dxSkinBasic, dxSkinBlack, dxSkinBlue, dxSkinBlueprint,
+  dxSkinCaramel, dxSkinCoffee, dxSkinDarkroom, dxSkinDarkSide,
+  dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinFoggy,
+  dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMetropolis,
+  dxSkinMetropolisDark, dxSkinMoneyTwins, dxSkinOffice2007Black,
+  dxSkinOffice2007Blue, dxSkinOffice2007Green, dxSkinOffice2007Pink,
+  dxSkinOffice2007Silver, dxSkinOffice2010Black, dxSkinOffice2010Blue,
+  dxSkinOffice2010Silver, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
+  dxSkinOffice2013White, dxSkinOffice2016Colorful, dxSkinOffice2016Dark,
+  dxSkinOffice2019Black, dxSkinOffice2019Colorful, dxSkinOffice2019DarkGray,
+  dxSkinOffice2019White, dxSkinPumpkin, dxSkinSeven, dxSkinSevenClassic,
+  dxSkinSharp, dxSkinSharpPlus, dxSkinSilver, dxSkinSpringtime, dxSkinStardust,
+  dxSkinSummer2008, dxSkinTheAsphaltWorld, dxSkinTheBezier,
+  dxSkinsDefaultPainters, dxSkinValentine, dxSkinVisualStudio2013Blue,
+  dxSkinVisualStudio2013Dark, dxSkinVisualStudio2013Light, dxSkinVS2010,
+  dxSkinWhiteprint, dxSkinXmas2008Blue, cxFilterControl, cxStyles, cxCustomData,
+  cxFilter, cxData, cxDataStorage, cxEdit, cxNavigator, dxDateRanges,
+  dxScrollbarAnnotations, cxDBData, cxGridLevel, cxClasses, cxGridCustomView,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid, cxCheckBox,
+  cxGeometry, dxFramedControl, dxPanel, Vcl.Menus, cxButtons, cxContainer;
+
+type
+  TFormCadastro2 = class(TForm)
+    CardPanel: TCardPanel;
+    Card_CadastroPessoa: TCard;
+    Card_tbPessoa: TCard;
+    Panel3: TPanel;
+    lbl_tbPessoa: TLabel;
+    Panel4: TPanel;
+    lbl_CadastroPessoa: TLabel;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    SearchBox: TSearchBox;
+    linePanelSearchBox: TPanel;
+    DBGridPessoa: TDBGrid;
+    DBGridEndereco: TDBGrid;
+    Panel9: TPanel;
+    BitBtnCancelar: TBitBtn;
+    BitBtnSalvar: TBitBtn;
+    Panel1: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Panel7: TPanel;
+    Panel8: TPanel;
+    DBEditCodigo: TDBEdit;
+    Panel10: TPanel;
+    lbl_CPFeCPNJ: TLabel;
+    Panel11: TPanel;
+    lbl_TipoPessoa: TLabel;
+    DBEditTipoPessoa: TDBEdit;
+    Panel12: TPanel;
+    lbl_NomePessoa: TLabel;
+    DBEditNomePessoa: TDBEdit;
+    lbl_codigo: TLabel;
+    cxGridtesteDBTableView1: TcxGridDBTableView;
+    cxGridtesteLevel1: TcxGridLevel;
+    cxGridteste: TcxGrid;
+    cxGridtesteDBTableView1Column1: TcxGridDBColumn;
+    cxGridtesteDBTableView1Column2: TcxGridDBColumn;
+    cxGridtesteDBTableView1Column3: TcxGridDBColumn;
+    cxGridtesteDBTableView1Column4: TcxGridDBColumn;
+    Panel2: TPanel;
+    BitBtnEditar: TBitBtn;
+    BitBtnExcluir: TBitBtn;
+    BitBtnNovo: TBitBtn;
+    DBEditCPFeCPNJ: TDBEdit;
+    procedure FormResize(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure SearchBoxEnter(Sender: TObject);
+    procedure SearchBoxExit(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure DBGridPessoaDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure SearchBoxChange(Sender: TObject);
+    procedure DBGridEnderecoDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure FormShow(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure BitBtnEditarClick(Sender: TObject);
+    procedure BitBtnNovoClick(Sender: TObject);
+    procedure BitBtnSalvarClick(Sender: TObject);
+    procedure BitBtnCancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+    procedure AdjustLayout;
+    procedure AdjustFontSizes;
+    procedure AdjustLabelPosition;
+    procedure SetMargins;
+    procedure DimensionarGrid(dbg: TDBGrid);
+    procedure DimensionarGrid2(gridView: TcxGridDBTableView);
+
+    procedure UpdatePanels;
+  public
+    { Public declarations }
+
+  end;
+
+type
+  TMyDBGrid = class(TDBGrid);
+  TMyPanel = class(TPanel);
+  TcxGridDBColumnHelper = class helper for TcxGridDBColumn
+  public
+    function GetBestFitWidthHelper: Integer;
+  end;
+
+var
+  FormCadastro2: TFormCadastro2;
+
+implementation
+
+{$R *.dfm}
+
+uses DataService_Impl;
+
+procedure TFormCadastro2.AdjustFontSizes;
+const
+  BaseFontSize = 12; // Tamanho da fonte base
+  FontSizePercent = 0.02;
+  // Percentual da largura do formulário para o tamanho da fonte
+var
+  NewFontSize: Integer;
+begin
+  // Calcular o novo tamanho da fonte com base na largura do formulário
+  NewFontSize := Round(ClientHeight * FontSizePercent);
+  // Garantir que o tamanho da fonte não fique menor que o tamanho base
+  if NewFontSize < BaseFontSize then
+    NewFontSize := BaseFontSize;
+  // Ajustar o tamanho da fonte dos controles
+  lbl_tbPessoa.Font.Size := Round(NewFontSize * 1.5);
+  lbl_CadastroPessoa.Font.Size := Round(NewFontSize * 1.5);
+
+  SearchBox.Font.Size := Round(NewFontSize * 1.2);
+
+  DBGridPessoa.Font.Size := Round(NewFontSize / 1.6);
+  DBGridPessoa.TitleFont.Size := Round(NewFontSize / 1.6);
+
+  DBGridEndereco.Font.Size := Round(NewFontSize / 1.6);
+  DBGridEndereco.TitleFont.Size := Round(NewFontSize / 1.6);
+
+  BitBtnNovo.Font.Size := NewFontSize;
+  BitBtnEditar.Font.Size := NewFontSize;
+  BitBtnCancelar.Font.Size := NewFontSize;
+  BitBtnSalvar.Font.Size := NewFontSize;
+  BitBtnExcluir.Font.Size := NewFontSize;
+
+
+  //Cadastro de Pessoa
+  lbl_codigo.Font.Size := Round(NewFontSize * 1);
+  DBEditCodigo.Font.Size := Round(NewFontSize * 1);
+
+  lbl_CPFeCPNJ.Font.Size := Round(NewFontSize * 1);
+  DBEditCPFeCPNJ.Font.Size := Round(NewFontSize * 1);
+
+  lbl_TipoPessoa.Font.Size := Round(NewFontSize * 1);
+  DBEditTipoPessoa.Font.Size := Round(NewFontSize * 1);
+
+  lbl_NomePessoa.Font.Size := Round(NewFontSize * 1);
+  DBEditNomePessoa.Font.Size := Round(NewFontSize * 1);
+
+  cxGridteste.Font.Size := Round(NewFontSize * 1);
+end;
+
+procedure TFormCadastro2.AdjustLabelPosition;
+begin
+  // Edit1.Left := Round(Panel4.Width * (Edit1.Left / Panel4.Width));
+  // Edit1.Top := Round(Panel4.Height * (Edit1.Top / Panel4.Height));
+end;
+
+procedure TFormCadastro2.AdjustLayout;
+begin
+  // Ajustar a largura e a altura do Panel com base na porcentagem do Form
+  Panel3.Height := Round(ClientHeight * 0.06);
+
+  Panel2.Width := Round(Panel5.Width * 0.5);
+  Panel6.Width := Round(ClientWidth * 0.4);
+  Panel9.Width := Round(ClientWidth * 0.5);
+
+
+
+  //
+  DBGridEndereco.Height := Round(CardPanel.Height * 0.3);
+
+  // Ajustar a largura e a altura da label
+  lbl_tbPessoa.Width := Round(Panel3.Width * 0.5);
+  lbl_CadastroPessoa.Width := Round(Panel4.Width * 0.5);
+
+  // Ajustar a largura e a altura da DbGridPessoa
+  // DBGridPessoa.Columns[0].Width := Round(CardPanel.Width * 0.1);
+  // DBGridPessoa.Columns[1].Width := Round(CardPanel.Width * 0.05);
+  // DBGridPessoa.Columns[2].Width := Round(CardPanel.Width * 0.25);
+  // DBGridPessoa.Columns[3].Width := Round(CardPanel.Width * 0.6);
+
+  // Ajustar a largura e a altura do BitBtn com base na porcentagem da largura e altura do Panel
+
+
+  BitBtnNovo.Width := Round(Panel2.Width * 0.16);
+  BitBtnNovo.Left := 0;
+
+  BitBtnEditar.Width := Round(Panel2.Width * 0.16);
+  BitBtnEditar.Left := BitBtnNovo.Left + BitBtnNovo.Width;
+
+  BitBtnCancelar.Width := Round(Panel2.Width * 0.16);
+  BitBtnCancelar.Left := 0;
+
+  if BitBtnCancelar.width < 80  then
+  BitBtnCancelar.width := 80;
+
+  BitBtnSalvar.Width := Round(Panel2.Width * 0.16);
+
+  BitBtnExcluir.Width := Round(Panel2.Width * 0.16);
+  BitBtnExcluir.Left := BitBtnEditar.Left + BitBtnEditar.Width;
+  // Opcional: Centralizar o BitBtn no Panel
+  // BitBtnNovo.Left := (Panel2.Width - BitBtnNovo.Width) div 2;
+  // BitBtnNovo.Top := (Panel2.Height - BitBtnNovo.Height) div 2;
+  if ClientHeight <= 562 then
+  Begin
+    Panel2.Width := Round(ClientWidth * 0.5);
+    Panel3.Height := Round(ClientHeight * 0.104);
+    Panel5.Height := Round(ClientHeight * 0.104);
+    Panel4.Height := Round(ClientHeight * 0.104);
+    Panel7.Height := Round(ClientHeight * 0.12);
+  End
+  Else if (ClientHeight > 562) and (ClientHeight <= 697) then
+  Begin
+    Panel2.Width := Round(ClientWidth * 0.5);
+    Panel3.Height := Round(ClientHeight * 0.092);
+    Panel5.Height := Round(ClientHeight * 0.092);
+    Panel4.Height := Round(ClientHeight * 0.092);
+    Panel7.Height := Round(ClientHeight * 0.105);
+  End
+  Else if (ClientHeight > 697) and (ClientHeight <= 729) then
+  Begin
+    Panel2.Width := Round(ClientWidth * 0.5);
+    Panel3.Height := Round(ClientHeight * 0.09);
+    Panel5.Height := Round(ClientHeight * 0.09);
+    Panel4.Height := Round(ClientHeight * 0.09);
+    Panel7.Height := Round(ClientHeight * 0.1);
+  End
+  Else If (ClientHeight > 729) and (ClientHeight <= 953) then
+  Begin
+    Panel2.Width := Round(ClientWidth * 0.46);
+    Panel3.Height := Round(ClientHeight * 0.08);
+    Panel5.Height := Round(ClientHeight * 0.08);
+    Panel4.Height := Round(ClientHeight * 0.08);
+    Panel7.Height := Round(ClientHeight * 0.1);
+  End
+  Else
+  Begin
+    Panel2.Width := Round(ClientWidth * 0.46);
+    Panel3.Height := Round(ClientHeight * 0.1);
+    Panel5.Height := Round(ClientHeight * 0.1);
+    Panel4.Height := Round(ClientHeight * 0.1);
+    Panel7.Height := Round(ClientHeight * 0.1);
+  End;
+
+end;
+
+procedure TFormCadastro2.BitBtnCancelarClick(Sender: TObject);
+begin
+   CardPanel.ActiveCard := Card_tbPessoa;
+end;
+
+procedure TFormCadastro2.BitBtnEditarClick(Sender: TObject);
+begin
+  CardPanel.ActiveCard := Card_CadastroPessoa;
+  DBEditCPFeCPNJ.SetFocus;
+  DataService.qryPessoa.Edit;
+end;
+
+procedure TFormCadastro2.BitBtnNovoClick(Sender: TObject);
+begin
+  CardPanel.ActiveCard := Card_CadastroPessoa;
+  DBEditCPFeCPNJ.SetFocus;
+  DataService.qryPessoa.Insert;
+end;
+
+procedure TFormCadastro2.BitBtnSalvarClick(Sender: TObject);
+begin
+  if DataService.qryPessoa.State in dsEditModes then
+  begin
+  DataService.qryPessoa.Post;
+  DataService.FDConnection.Commit;
+  end;
+end;
+
+procedure TFormCadastro2.DBGridEnderecoDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  if Odd(DBGridEndereco.DataSource.DataSet.RecNo) then
+    DBGridEndereco.Canvas.Brush.Color := clBlack
+  else
+    DBGridEndereco.Canvas.Brush.Color := clWhite;
+
+  if gdSelected in State then
+  begin
+    DBGridEndereco.Canvas.Brush.Color := $00E57F1A;
+    DBGridEndereco.Canvas.Font.Color := clWhite;
+    TDBGrid(Sender).Canvas.Font.Style := [fsBold];
+  end
+  else
+  begin
+    DBGridEndereco.Canvas.Brush.Color := clWindow;
+    DBGridEndereco.Canvas.Font.Color := clWindowText;
+    TDBGrid(Sender).Canvas.Font.Style := [];
+  end;
+  DBGridEndereco.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+
+  DBGridEndereco.Canvas.TextRect(Rect,
+    Rect.Left + (Rect.Width - (DBGridEndereco.Canvas.TextWidth
+    (Column.Title.Caption))) div 2, Rect.Top + Round(DBGridEndereco.Height *
+    0.03), Column.Title.Caption);
+
+  if Column.Index in [0, 1, 3, 7] then
+  begin
+    DBGridEndereco.Canvas.TextRect(Rect,
+      Rect.Left + (Rect.Width - (DBGridEndereco.Canvas.TextWidth
+      (Column.Field.DisplayText))) div 2,
+      Rect.Top + Round(DBGridEndereco.Height * 0.03), Column.Field.DisplayText);
+  end
+  Else
+  begin
+    DBGridEndereco.Canvas.TextRect(Rect,
+      Rect.Left + Round(DBGridEndereco.Height * 0.03),
+      Rect.Top + Round(DBGridEndereco.Height * 0.03), Column.Field.DisplayText);
+  end;
+
+end;
+
+procedure TFormCadastro2.DBGridPessoaDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+
+begin
+
+  if gdSelected in State then
+  begin
+    DBGridPessoa.Canvas.Brush.Color := $00E57F1A;
+    DBGridPessoa.Canvas.Font.Color := clWhite;
+    TDBGrid(Sender).Canvas.Font.Style := [fsBold];
+  end
+  else
+  begin
+    DBGridPessoa.Canvas.Brush.Color := clWindow;
+    DBGridPessoa.Canvas.Font.Color := clWindowText;
+    TDBGrid(Sender).Canvas.Font.Style := [];
+  end;
+
+  DBGridPessoa.Canvas.TextRect(Rect,
+    Rect.Left + (Rect.Width - (DBGridPessoa.Canvas.TextWidth
+    (Column.Title.Caption))) div 2,
+    Rect.Top + Round(DBGridPessoa.Height * 0.03), Column.Title.Caption);
+
+  if Column.Index in [0, 1, 2] then
+  begin
+    DBGridPessoa.Canvas.TextRect(Rect,
+      Rect.Left + (Rect.Width - (DBGridPessoa.Canvas.TextWidth
+      (Column.Field.DisplayText))) div 2,
+      Rect.Top + Round(DBGridPessoa.Height * 0.03), Column.Field.DisplayText);
+  end
+  Else
+  begin
+    DBGridPessoa.Canvas.TextRect(Rect,
+      Rect.Left + Round(DBGridPessoa.Height * 0.03),
+      Rect.Top + Round(DBGridPessoa.Height * 0.03), Column.Field.DisplayText);
+  end;
+end;
+
+procedure TFormCadastro2.DimensionarGrid(dbg: TDBGrid);
+type
+  TArray = array of Integer;
+  procedure AjustarColumns(Swidth, TSize: Integer; Asize: TArray);
+  var
+    idx: Integer;
+  begin
+    if TSize = 0 then
+    begin
+      TSize := dbg.Columns.Count;
+      for idx := 0 to dbg.Columns.Count - 1 do
+        dbg.Columns[idx].Width := (dbg.Width - dbg.Canvas.TextWidth('AAAAAA'))
+          div TSize;
+    end
+    else
+    begin
+      for idx := 0 to dbg.Columns.Count - 1 do
+        dbg.Columns[idx].Width := dbg.Columns[idx].Width +
+          (Swidth * Asize[idx] div TSize);
+    end;
+  end;
+
+var
+  idx, Twidth, TSize, Swidth: Integer;
+  AWidth: TArray;
+  Asize: TArray;
+begin
+  SetLength(AWidth, dbg.Columns.Count);
+  SetLength(Asize, dbg.Columns.Count);
+  Twidth := 0;
+  TSize := 0;
+  for idx := 0 to dbg.Columns.Count - 1 do
+  begin
+    dbg.Columns[idx].Width := dbg.Canvas.TextWidth
+      (dbg.Columns[idx].Title.Caption + 'AAAAA');
+    AWidth[idx] := dbg.Columns[idx].Width;
+    Twidth := Twidth + AWidth[idx];
+
+    if Assigned(dbg.Columns[idx].Field) then
+      Asize[idx] := dbg.Columns[idx].Field.Size
+    else
+      Asize[idx] := 1;
+
+    TSize := TSize + Asize[idx];
+  end;
+  if dgColLines in dbg.Options then
+    Twidth := Twidth + dbg.Columns.Count;
+
+  if dgIndicator in dbg.Options then
+    Twidth := Twidth + IndicatorWidth;
+
+  Swidth := dbg.ClientWidth - Twidth;
+  AjustarColumns(Swidth, TSize, Asize);
+
+  TMyDBGrid(DBGridPessoa).DefaultRowHeight := Round(DBGridPessoa.Height * 0.1);
+  TMyDBGrid(DBGridEndereco).DefaultRowHeight :=
+    Round(DBGridEndereco.Height * 0.14);
+
+
+end;
+
+
+procedure TFormCadastro2.DimensionarGrid2(gridView: TcxGridDBTableView);
+type
+  TArray = array of Integer;
+  procedure AjustarColumns(Swidth, TSize: Integer; Asize: TArray);
+  var
+    idx: Integer;
+  begin
+    if TSize = 0 then
+    begin
+      TSize := gridView.ColumnCount;
+      for idx := 0 to gridView.ColumnCount - 1 do
+        gridView.Columns[idx].Width := (gridView.Control.ClientWidth - 20) div TSize; // Ajuste para margem
+    end
+    else
+    begin
+      for idx := 0 to gridView.ColumnCount - 1 do
+        gridView.Columns[idx].Width := gridView.Columns[idx].Width + (Swidth * Asize[idx] div TSize);
+    end;
+  end;
+var
+  idx, Twidth, TSize, Swidth: Integer;
+  AWidth: TArray;
+  Asize: TArray;
+begin
+  SetLength(AWidth, gridView.ColumnCount);
+  SetLength(Asize, gridView.ColumnCount);
+  Twidth := 0;
+  TSize := 0;
+  for idx := 0 to gridView.ColumnCount - 1 do
+  begin
+    gridView.Columns[idx].Width := gridView.Columns[idx].GetBestFitWidthHelper;
+    AWidth[idx] := gridView.Columns[idx].Width;
+    Twidth := Twidth + AWidth[idx];
+    if Assigned(gridView.Columns[idx].DataBinding.Field) then
+      Asize[idx] := gridView.Columns[idx].DataBinding.Field.Size
+    else
+      Asize[idx] := 1;
+    TSize := TSize + Asize[idx];
+  end;
+  // Ajustar para incluir bordas e outras considerações de layout
+  if gridView.OptionsView.GridLines in [glBoth, glHorizontal, glVertical] then
+    Twidth := Twidth + gridView.ColumnCount;
+  if gridView.OptionsView.Indicator then
+    Twidth := Twidth + gridView.OptionsView.IndicatorWidth;
+  Swidth := gridView.Control.ClientWidth - Twidth;
+  AjustarColumns(Swidth, TSize, Asize);
+  cxGridtesteDBTableView1.OptionsView.DataRowHeight  := Round(cxGridteste.Height * 0.1);
+end;
+
+procedure TFormCadastro2.SearchBoxChange(Sender: TObject);
+begin
+  // Convertendo o texto da pesquisa para maiúsculas
+  var
+  SearchText := UpperCase(SearchBox.Text);
+  // Se o texto da pesquisa não estiver vazio, aplique o filtro
+  if SearchText <> EmptyStr then
+  begin
+    // Configure o filtro para comparar com o texto em maiúsculas
+    DataService.qryPessoa.Filter := 'Upper(nom_pessoa) LIKE ' +
+      QuotedStr(SearchText + '%');
+    DataService.qryPessoa.Filtered := True;
+  end
+  else
+  begin
+    // Se o texto da pesquisa estiver vazio, desative o filtro
+    DataService.qryPessoa.Filtered := False;
+    DataService.qryPessoa.Filter := EmptyStr;
+  end;
+end;
+
+procedure TFormCadastro2.SearchBoxEnter(Sender: TObject);
+begin
+  SearchBox.Clear;
+  linePanelSearchBox.Color := clBlue;
+  SearchBox.Font.Color := clBlack;
+end;
+
+procedure TFormCadastro2.SearchBoxExit(Sender: TObject);
+begin
+  SearchBox.TextHint := 'Procurar Pessoa..';
+  linePanelSearchBox.Color := clWhite;
+  SearchBox.Font.Color := clSilver;
+end;
+
+procedure TFormCadastro2.SetMargins;
+const
+  FontMarginPercent = 0.01; // Percentual da largura do formulário para a margem
+var
+  NewMarginSize: Integer;
+begin
+  // Calcular o novo tamanho da margem com base na largura do formulário
+  NewMarginSize := Round(ClientWidth * FontMarginPercent);
+  // Garantir que o tamanho da margem não fique menor que 16
+  if NewMarginSize < 16 then
+    NewMarginSize := 16;
+
+  // Ajustar as margens dos Labels
+  lbl_tbPessoa.Margins.Top := Round(NewMarginSize * 0.5);
+  lbl_tbPessoa.Margins.Bottom := Round(NewMarginSize * 0.5);
+  lbl_tbPessoa.Margins.Left := NewMarginSize;
+  lbl_tbPessoa.AlignWithMargins := True;
+
+  lbl_CadastroPessoa.Margins.Top := Round(NewMarginSize * 0.5);
+  lbl_CadastroPessoa.Margins.Bottom := Round(NewMarginSize * 0.5);
+  lbl_CadastroPessoa.Margins.Left := NewMarginSize;
+  lbl_CadastroPessoa.AlignWithMargins := True;
+
+
+  //Cadastro de Pessoa
+  lbl_codigo.Margins.Left := NewMarginSize;
+  lbl_codigo.Margins.Right := NewMarginSize;
+  lbl_codigo.AlignWithMargins := True;
+
+  DBEditCodigo.Margins.Bottom := Round(NewMarginSize * 0.5);
+  DBEditCodigo.Margins.Left := NewMarginSize;
+  DBEditCodigo.Margins.Right := NewMarginSize;
+  DBEditCodigo.AlignWithMargins := True;
+
+  lbl_CPFeCPNJ.Margins.Left := NewMarginSize;
+  lbl_CPFeCPNJ.Margins.Right := NewMarginSize;
+  lbl_CPFeCPNJ.AlignWithMargins := True;
+
+  DBEditCPFeCPNJ.Margins.Bottom := Round(NewMarginSize * 0.5);
+  DBEditCPFeCPNJ.Margins.Left := NewMarginSize;
+  DBEditCPFeCPNJ.Margins.Right := NewMarginSize;
+  DBEditCPFeCPNJ.AlignWithMargins := True;
+
+  lbl_TipoPessoa.Margins.Left := NewMarginSize;
+  lbl_TipoPessoa.Margins.Right := NewMarginSize;
+  lbl_TipoPessoa.AlignWithMargins := True;
+
+  DBEditTipoPessoa.Margins.Bottom := Round(NewMarginSize * 0.5);
+  DBEditTipoPessoa.Margins.Left := NewMarginSize;
+  DBEditTipoPessoa.Margins.Right := NewMarginSize;
+  DBEditTipoPessoa.AlignWithMargins := True;
+
+  lbl_NomePessoa.Margins.Left := NewMarginSize;
+  lbl_NomePessoa.Margins.Right := NewMarginSize;
+  lbl_NomePessoa.AlignWithMargins := True;
+
+  DBEditNomePessoa.Margins.Bottom := Round(NewMarginSize * 0.5);
+  DBEditNomePessoa.Margins.Left := NewMarginSize;
+  DBEditNomePessoa.Margins.Right := NewMarginSize;
+  DBEditNomePessoa.AlignWithMargins := True;
+
+
+  // Ajustar as margens dos Botões
+
+  if ClientHeight <= 562 then
+  Begin
+    Panel6.Margins.Left := NewMarginSize;
+    Panel6.Margins.Top := Round(NewMarginSize / 2.2);
+    Panel6.Margins.Bottom := Round(NewMarginSize / 2.2);
+    Panel6.Margins.Right := NewMarginSize;
+    Panel6.AlignWithMargins := True;
+
+    // Ajustar as margens dos Botões
+    BitBtnNovo.Margins.Top := Round(NewMarginSize / 2);
+    BitBtnNovo.Margins.Right := Round(NewMarginSize / 2);
+    BitBtnNovo.Margins.Bottom := Round(NewMarginSize / 2);
+    BitBtnNovo.AlignWithMargins := True;
+
+    BitBtnEditar.Margins.Top := Round(NewMarginSize / 2);
+    BitBtnEditar.Margins.Right := Round(NewMarginSize / 2);
+    BitBtnEditar.Margins.Bottom := Round(NewMarginSize / 2);
+    BitBtnEditar.AlignWithMargins := True;
+
+    BitBtnCancelar.Margins.Top := Round(NewMarginSize / 2);
+    BitBtnCancelar.Margins.Right := Round(NewMarginSize / 2);
+    BitBtnCancelar.Margins.Bottom := Round(NewMarginSize / 2);
+    BitBtnCancelar.AlignWithMargins := True;
+
+    BitBtnSalvar.Margins.Top := Round(NewMarginSize / 2);
+    BitBtnSalvar.Margins.Right := Round(NewMarginSize / 2);
+    BitBtnSalvar.Margins.Bottom := Round(NewMarginSize / 2);
+    BitBtnSalvar.AlignWithMargins := True;
+
+    BitBtnExcluir.Margins.Top := Round(NewMarginSize / 2);
+    BitBtnExcluir.Margins.Right := NewMarginSize;
+    BitBtnExcluir.Margins.Bottom := Round(NewMarginSize / 2);
+    BitBtnExcluir.AlignWithMargins := True;
+  End
+  Else if (ClientHeight > 562) and (ClientHeight <= 697) then
+  Begin
+    Panel6.Margins.Left := NewMarginSize;
+    Panel6.Margins.Top := Round(NewMarginSize / 2.4);
+    Panel6.Margins.Bottom := Round(NewMarginSize / 2.4);
+    Panel6.Margins.Right := NewMarginSize;
+    Panel6.AlignWithMargins := True;
+
+    // Ajustar as margens dos Botões
+    BitBtnNovo.Margins.Top := Round(NewMarginSize / 2);
+    BitBtnNovo.Margins.Right := Round(NewMarginSize / 2);
+    BitBtnNovo.Margins.Bottom := Round(NewMarginSize / 2);
+    BitBtnNovo.AlignWithMargins := True;
+
+    BitBtnEditar.Margins.Top := Round(NewMarginSize / 2);
+    BitBtnEditar.Margins.Right := Round(NewMarginSize / 2);
+    BitBtnEditar.Margins.Bottom := Round(NewMarginSize / 2);
+    BitBtnEditar.AlignWithMargins := True;
+
+    BitBtnCancelar.Margins.Top := Round(NewMarginSize / 2);
+    BitBtnCancelar.Margins.Right := Round(NewMarginSize / 2);
+    BitBtnCancelar.Margins.Bottom := Round(NewMarginSize / 2);
+    BitBtnCancelar.AlignWithMargins := True;
+
+    BitBtnSalvar.Margins.Top := Round(NewMarginSize / 2);
+    BitBtnSalvar.Margins.Right := Round(NewMarginSize / 2);
+    BitBtnSalvar.Margins.Bottom := Round(NewMarginSize / 2);
+    BitBtnSalvar.AlignWithMargins := True;
+
+    BitBtnExcluir.Margins.Top := Round(NewMarginSize / 2);
+    BitBtnExcluir.Margins.Right := NewMarginSize;
+    BitBtnExcluir.Margins.Bottom := Round(NewMarginSize / 2);
+    BitBtnExcluir.AlignWithMargins := True;
+  End
+  Else if (ClientHeight > 697) and (ClientHeight <= 729) then
+  Begin
+    Panel6.Margins.Left := NewMarginSize;
+    Panel6.Margins.Top := Round(NewMarginSize / 2);
+    Panel6.Margins.Bottom := Round(NewMarginSize / 2);
+    Panel6.Margins.Right := NewMarginSize;
+    Panel6.AlignWithMargins := True;
+
+    // Ajustar as margens dos Botões
+    BitBtnNovo.Margins.Top := Round(NewMarginSize / 2);
+    BitBtnNovo.Margins.Right := NewMarginSize;
+    BitBtnNovo.Margins.Bottom := Round(NewMarginSize / 2);
+    BitBtnNovo.AlignWithMargins := True;
+
+    BitBtnEditar.Margins.Top := Round(NewMarginSize / 2);
+    BitBtnEditar.Margins.Right := NewMarginSize;
+    BitBtnEditar.Margins.Bottom := Round(NewMarginSize / 2);
+    BitBtnEditar.AlignWithMargins := True;
+
+    BitBtnCancelar.Margins.Top := Round(NewMarginSize / 2);
+    BitBtnCancelar.Margins.Right := NewMarginSize;
+    BitBtnCancelar.Margins.Bottom := Round(NewMarginSize / 2);
+    BitBtnCancelar.AlignWithMargins := True;
+
+    BitBtnSalvar.Margins.Top := Round(NewMarginSize / 2);
+    BitBtnSalvar.Margins.Right := NewMarginSize;
+    BitBtnSalvar.Margins.Bottom := Round(NewMarginSize / 2);
+    BitBtnSalvar.AlignWithMargins := True;
+
+    BitBtnExcluir.Margins.Top := Round(NewMarginSize / 2);
+    BitBtnExcluir.Margins.Right := NewMarginSize;
+    BitBtnExcluir.Margins.Bottom := Round(NewMarginSize / 2);
+    BitBtnExcluir.AlignWithMargins := True;
+  End
+  Else If (ClientHeight > 729) and (ClientHeight <= 953) then
+  Begin
+    Panel6.Margins.Left := NewMarginSize;
+    Panel6.Margins.Top := Round(NewMarginSize / 2);
+    Panel6.Margins.Bottom := Round(NewMarginSize / 2);
+    Panel6.Margins.Right := NewMarginSize;
+    Panel6.AlignWithMargins := True;
+
+    // Ajustar as margens dos Botões
+    BitBtnNovo.Margins.Top := NewMarginSize;
+    BitBtnNovo.Margins.Right := NewMarginSize;
+    BitBtnNovo.Margins.Bottom := NewMarginSize;
+    BitBtnNovo.AlignWithMargins := True;
+
+    BitBtnEditar.Margins.Top := NewMarginSize;
+    BitBtnEditar.Margins.Right := NewMarginSize;
+    BitBtnEditar.Margins.Bottom := NewMarginSize;
+    BitBtnEditar.AlignWithMargins := True;
+
+    BitBtnCancelar.Margins.Top := NewMarginSize;
+    BitBtnCancelar.Margins.Right := NewMarginSize;
+    BitBtnCancelar.Margins.Bottom := NewMarginSize;
+    BitBtnCancelar.AlignWithMargins := True;
+
+    BitBtnSalvar.Margins.Top := NewMarginSize;
+    BitBtnSalvar.Margins.Right := NewMarginSize;
+    BitBtnSalvar.Margins.Bottom := NewMarginSize;
+    BitBtnSalvar.AlignWithMargins := True;
+
+    BitBtnExcluir.Margins.Top := NewMarginSize;
+    BitBtnExcluir.Margins.Right := NewMarginSize;
+    BitBtnExcluir.Margins.Bottom := NewMarginSize;
+    BitBtnExcluir.AlignWithMargins := True;
+  End
+  Else
+  Begin
+    Panel6.Margins.Left := NewMarginSize;
+    Panel6.Margins.Top := Round(NewMarginSize);
+    Panel6.Margins.Bottom := Round(NewMarginSize);
+    Panel6.Margins.Right := NewMarginSize;
+    Panel6.AlignWithMargins := True;
+
+    // Ajustar as margens dos Botões
+    BitBtnNovo.Margins.Top := NewMarginSize;
+    BitBtnNovo.Margins.Right := NewMarginSize;
+    BitBtnNovo.Margins.Bottom := NewMarginSize;
+    BitBtnNovo.AlignWithMargins := True;
+
+    BitBtnEditar.Margins.Top := NewMarginSize;
+    BitBtnEditar.Margins.Right := NewMarginSize;
+    BitBtnEditar.Margins.Bottom := NewMarginSize;
+    BitBtnEditar.AlignWithMargins := True;
+
+    BitBtnCancelar.Margins.Top := NewMarginSize;
+    BitBtnCancelar.Margins.Right := NewMarginSize;
+    BitBtnCancelar.Margins.Bottom := NewMarginSize;
+    BitBtnCancelar.AlignWithMargins := True;
+
+    BitBtnSalvar.Margins.Top := NewMarginSize;
+    BitBtnSalvar.Margins.Right := NewMarginSize;
+    BitBtnSalvar.Margins.Bottom := NewMarginSize;
+    BitBtnSalvar.AlignWithMargins := True;
+
+    BitBtnExcluir.Margins.Top := NewMarginSize;
+    BitBtnExcluir.Margins.Right := NewMarginSize;
+    BitBtnExcluir.Margins.Bottom := NewMarginSize;
+    BitBtnExcluir.AlignWithMargins := True;
+  End;
+
+end;
+
+procedure TFormCadastro2.UpdatePanels;
+var
+  i: Integer;
+  ButtonWidth, ButtonHeight, ButtonSpacing: Integer;
+  Buttons: array[0..2] of TButton; // Supondo que você tem exatamente 3 botões
+  PanelWidth, PanelHeight, PanelSpacing: Integer;
+  TotalWidth: Integer;
+  Panels: array[0..3] of TPanel;
+  PanelWidths: array[0..3] of Integer;
+begin
+  // Inicialize o array de botões
+  Buttons[0] := Button1;
+  Buttons[1] := Button2;
+  Buttons[2] := Button3;
+  // Calcule a largura, a altura e o espaçamento dos botões
+  ButtonWidth := Panel1.ClientWidth div Length(Buttons);
+  ButtonHeight := Panel1.ClientHeight;
+  // Ajuste o espaçamento para que os botões se ajustem corretamente
+  ButtonSpacing := 0; // Altere se precisar de espaçamento extra entre os botões
+  // Ajuste a largura, a altura e a posição de cada botão
+  for i := 0 to High(Buttons) do
+  begin
+    Buttons[i].Width := ButtonWidth - ButtonSpacing; // Ajuste a largura para levar em conta o espaçamento
+    Buttons[i].Height := ButtonHeight;
+    Buttons[i].Left := i * ButtonWidth + ButtonSpacing div 2; // Ajusta a posição horizontal
+    Buttons[i].Top := 0; // Alinha verticalmente no topo do painel
+  end;
+
+  // Inicialize o array de painéis
+  Panels[0] := Panel8;
+  Panels[1] := Panel10;
+  Panels[2] := Panel11;
+  Panels[3] := Panel12;
+  // Calcule a largura e a altura dos painéis
+  TotalWidth := Panel7.ClientWidth;
+  PanelHeight := Panel7.ClientHeight;
+  // Ajuste o espaçamento para que os painéis se ajustem corretamente
+  PanelSpacing := 0; // Altere se precisar de espaçamento extra entre os painéis
+  // Calcule as larguras dos painéis com base nas porcentagens
+  PanelWidths[0] := TotalWidth * 25 div 100; // 25% do total
+  PanelWidths[1] := TotalWidth * 25 div 100; // 25% do total
+  PanelWidths[2] := TotalWidth * 8 div 100; // 10% do total
+  PanelWidths[3] := TotalWidth - (PanelWidths[0] + PanelWidths[1] + PanelWidths[2]); // 65% do total
+  // Ajuste a largura, a altura e a posição de cada painel
+  // Calcule a posição inicial dos painéis
+  Panels[0].Width := PanelWidths[0];
+  Panels[0].Height := PanelHeight;
+  Panels[0].Left := 0;
+  Panels[0].Top := 0;
+  Panels[1].Width := PanelWidths[1];
+  Panels[1].Height := PanelHeight;
+  Panels[1].Left := Panels[0].Width + PanelSpacing;
+  Panels[1].Top := 0;
+  Panels[2].Width := PanelWidths[2];
+  Panels[2].Height := PanelHeight;
+  Panels[2].Left := Panels[1].Left + Panels[1].Width + PanelSpacing;
+  Panels[2].Top := 0;
+  Panels[3].Width := PanelWidths[3];
+  Panels[3].Height := PanelHeight;
+  Panels[3].Left := Panels[2].Left + Panels[2].Width + PanelSpacing;
+  Panels[3].Top := 0;
+
+//    cxGridtesteDBTableView1Column1.Width := ClientWidth * 10 div 100;
+//    cxGridtesteDBTableView1Column2.Width := ClientWidth * 10 div 100;
+//    cxGridtesteDBTableView1Column3.Width := ClientWidth * 40 div 100;
+//    cxGridtesteDBTableView1Column4.Width := ClientWidth * 40 div 100;
+end;
+
+procedure TFormCadastro2.FormActivate(Sender: TObject);
+begin
+//    if CardPanel.ActiveCard = Card_CadastroPessoa then
+//    SearchBox.SetFocus;
+end;
+
+procedure TFormCadastro2.FormCreate(Sender: TObject);
+begin
+  CardPanel.ActiveCard := Card_tbPessoa;
+  DBEditTipoPessoa.Alignment := taCenter;
+
+  AdjustFontSizes;
+  SetMargins;
+  AdjustLabelPosition;
+  DimensionarGrid(DBGridPessoa);
+  DimensionarGrid(DBGridEndereco);
+  DimensionarGrid2(cxGridtesteDBTableView1);
+  UpdatePanels;
+
+
+end;
+
+procedure TFormCadastro2.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = VK_ESCAPE then
+    Self.Close;
+
+  if Key = VK_RETURN then
+    perform(WM_NEXTDLGCTL, 0, 0);
+
+end;
+
+procedure TFormCadastro2.FormResize(Sender: TObject);
+begin
+  AdjustLayout;
+  AdjustFontSizes;
+  AdjustLabelPosition;
+  SetMargins;
+  DimensionarGrid(DBGridPessoa);
+  DimensionarGrid(DBGridEndereco);
+  DimensionarGrid2(cxGridtesteDBTableView1);
+
+  UpdatePanels;
+end;
+
+procedure TFormCadastro2.FormShow(Sender: TObject);
+begin
+  // Maximiza o formulário
+  WindowState := wsMaximized;
+//
+//  // Exibe as dimensões da área de cliente do formulário
+//  ShowMessage(Format('Dimensões do formulário maximizado: %d x %d',
+//    [ClientWidth, ClientHeight]));
+end;
+
+{ TcxGridDBColumnHelper }
+
+function TcxGridDBColumnHelper.GetBestFitWidthHelper: Integer;
+begin
+  Result := GetBestFitWidth;
+end;
+
+end.

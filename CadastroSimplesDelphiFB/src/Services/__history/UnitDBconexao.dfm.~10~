@@ -1,0 +1,61 @@
+object ServicoDataModule: TServicoDataModule
+  OnCreate = DataModuleCreate
+  Height = 480
+  Width = 640
+  object FDConnection: TFDConnection
+    Params.Strings = (
+      'Database=E:\Programacao\VisualTecProva\DATABASE\DADOS.FDB'
+      'User_Name=SYSDBA'
+      'Password=masterkey'
+      'Port=3050'
+      'CharacterSet=WIN1252'
+      'DriverID=FB')
+    Connected = True
+    LoginPrompt = False
+    Left = 64
+  end
+  object FDGUIxWaitCursor: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    Left = 64
+    Top = 56
+  end
+  object FDPhysFBDriverLink: TFDPhysFBDriverLink
+    VendorLib = 'C:\Program Files\Firebird\Firebird_2_5\WOW64\fbclient.dll'
+    Left = 64
+    Top = 112
+  end
+  object qryPessoa: TFDQuery
+    Connection = FDConnection
+    SQL.Strings = (
+      
+        'select id_pessoa, ind_tipo_pessoa, num_cpf_cnpj, nom_pessoa, id_' +
+        'endereco'
+      'from tb_pessoa')
+    Left = 296
+    object qryPessoaID_PESSOA: TLargeintField
+      FieldName = 'ID_PESSOA'
+      Origin = 'ID_PESSOA'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object qryPessoaIND_TIPO_PESSOA: TStringField
+      FieldName = 'IND_TIPO_PESSOA'
+      Origin = 'IND_TIPO_PESSOA'
+      FixedChar = True
+      Size = 1
+    end
+    object qryPessoaNUM_CPF_CNPJ: TStringField
+      FieldName = 'NUM_CPF_CNPJ'
+      Origin = 'NUM_CPF_CNPJ'
+    end
+    object qryPessoaNOM_PESSOA: TStringField
+      FieldName = 'NOM_PESSOA'
+      Origin = 'NOM_PESSOA'
+      Size = 100
+    end
+    object qryPessoaID_ENDERECO: TLargeintField
+      FieldName = 'ID_ENDERECO'
+      Origin = 'ID_ENDERECO'
+    end
+  end
+end

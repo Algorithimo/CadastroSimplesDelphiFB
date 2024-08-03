@@ -1,0 +1,16 @@
+program projectVisualtecProva;
+
+uses
+  Vcl.Forms,
+  Main in 'src\Tela\Main.pas' {FormMain},
+  DataService_Impl in 'src\Services\DataService_Impl.pas' {DataService: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TFormMain, FormMain);
+  Application.CreateForm(TDataService, DataService);
+  Application.Run;
+end.

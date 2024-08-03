@@ -1,0 +1,131 @@
+object ServicoDataModule: TServicoDataModule
+  OnCreate = DataModuleCreate
+  Height = 480
+  Width = 640
+  object FDConnection: TFDConnection
+    Params.Strings = (
+      'Database=E:\Programacao\VisualTecProva\DATABASE\DADOS.FDB'
+      'User_Name=SYSDBA'
+      'Password=masterkey'
+      'Port=3050'
+      'CharacterSet=WIN1252'
+      'DriverID=FB')
+    Connected = True
+    Left = 40
+    Top = 24
+  end
+  object FDGUIxWaitCursor: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    Left = 144
+    Top = 24
+  end
+  object FDPhysFBDriverLink: TFDPhysFBDriverLink
+    VendorLib = 'C:\Program Files\Firebird\Firebird_2_5\WOW64\fbclient.dll'
+    Left = 256
+    Top = 24
+  end
+  object FDQueryFiltroPessoa: TFDQuery
+    Connection = FDConnection
+    SQL.Strings = (
+      'SELECT '
+      '    P.ID_PESSOA,'
+      '    P.IND_TIPO_PESSOA,'
+      '    P.NUM_CPF_CNPJ,'
+      '    P.NOM_PESSOA,'
+      '    P.ID_ENDERECO,'
+      '    E.NOM_ENDERECO,'
+      '    E.NOM_MUNICIPIO,'
+      '    E.NUM_CEP,'
+      '    E.NUM_ENDERECO,'
+      '    E.NOM_BAIRRO,'
+      '    E.COD_UF,'
+      '    E.TXT_COMPLEMENTO'
+      'FROM '
+      '    TB_PESSOA P'
+      'LEFT JOIN '
+      '    TB_ENDERECO E ON P.ID_PESSOA = E.ID_ENDERECO;')
+    Left = 40
+    Top = 136
+    object FDQueryFiltroPessoaID_PESSOA: TLargeintField
+      FieldName = 'ID_PESSOA'
+      Origin = 'ID_PESSOA'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQueryFiltroPessoaIND_TIPO_PESSOA: TStringField
+      FieldName = 'IND_TIPO_PESSOA'
+      Origin = 'IND_TIPO_PESSOA'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQueryFiltroPessoaNOM_ENDERECO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOM_ENDERECO'
+      Origin = 'NOM_ENDERECO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object FDQueryFiltroPessoaNOM_MUNICIPIO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOM_MUNICIPIO'
+      Origin = 'NOM_MUNICIPIO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object FDQueryFiltroPessoaNUM_CPF_CNPJ: TStringField
+      FieldName = 'NUM_CPF_CNPJ'
+      Origin = 'NUM_CPF_CNPJ'
+    end
+    object FDQueryFiltroPessoaNOM_PESSOA: TStringField
+      FieldName = 'NOM_PESSOA'
+      Origin = 'NOM_PESSOA'
+      Size = 100
+    end
+    object FDQueryFiltroPessoaID_ENDERECO: TLargeintField
+      FieldName = 'ID_ENDERECO'
+      Origin = 'ID_ENDERECO'
+    end
+    object FDQueryFiltroPessoaNUM_CEP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NUM_CEP'
+      Origin = 'NUM_CEP'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 15
+    end
+    object FDQueryFiltroPessoaNUM_ENDERECO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NUM_ENDERECO'
+      Origin = 'NUM_ENDERECO'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object FDQueryFiltroPessoaNOM_BAIRRO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOM_BAIRRO'
+      Origin = 'NOM_BAIRRO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object FDQueryFiltroPessoaCOD_UF: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'COD_UF'
+      Origin = 'COD_UF'
+      ProviderFlags = []
+      ReadOnly = True
+      FixedChar = True
+      Size = 2
+    end
+    object FDQueryFiltroPessoaTXT_COMPLEMENTO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'TXT_COMPLEMENTO'
+      Origin = 'TXT_COMPLEMENTO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+  end
+end

@@ -1,0 +1,26 @@
+object ServicoDataModule: TServicoDataModule
+  OnCreate = DataModuleCreate
+  Height = 480
+  Width = 640
+  object FDConnection: TFDConnection
+    Params.Strings = (
+      'Database=E:\Programa'#231#227'o\VisualTecProva\DATABASE\DADOS.FDB'
+      'User_Name=SYSDBA'
+      'Password=masterkey'
+      'Port=3050'
+      'CharacterSet=WIN1252'
+      'DriverID=FB')
+    Left = 40
+    Top = 24
+  end
+  object FDGUIxWaitCursor: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    Left = 136
+    Top = 24
+  end
+  object FDPhysFBDriverLink: TFDPhysFBDriverLink
+    VendorLib = 'C:\Program Files\Firebird\Firebird_2_5\WOW64\fbclient.dll'
+    Left = 256
+    Top = 24
+  end
+end

@@ -1,0 +1,64 @@
+unit unitMain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.DBCtrls, Data.DB,
+  Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    DBNavigatorPessoa: TDBNavigator;
+    GroupBoxPessoa: TGroupBox;
+    DBGridPessoa: TDBGrid;
+    GroupBox1: TGroupBox;
+    DBNavigator1: TDBNavigator;
+    DBGridEndereco: TDBGrid;
+    procedure FormResize(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+    Constraints.MinWidth := 500;
+    Constraints.MinHeight := 500;
+    Constraints.MaxWidth := 1920;
+    Constraints.MaxHeight := 1080;
+end;
+
+procedure TForm1.FormResize(Sender: TObject);
+const
+  LarguraPercentual = 0.90;  // 90% da largura do formulário
+  AlturaPercentual = 0.85;   // 85% da altura do formulário
+  ColunaPercentual = 0.80;   // 80% da largura do TStringGrid
+  MargemPercentual = 0.05;   // Margem de 5%
+begin
+    If Self.WindowState = TWindowState.wsMinimized then
+        Exit;
+
+
+
+//      ssgItens.Left := 0;
+//      ssgItens.Top := 0;
+//      ssgItens.Width := Round(ClientWidth * LarguraPercentual);
+//      ssgItens.Height := Round(ClientHeight * AlturaPercentual);
+//
+//
+//      fraLegenda.Top := ssgItens.Top + ssgItens.Height + Round(ClientHeight * MargemPercentual);
+//      fraTotais.Top := fraLegenda.Top;
+
+end;
+
+end.

@@ -1,0 +1,54 @@
+unit unitMain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.DBCtrls, Data.DB,
+  Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    DBNavigatorPessoa: TDBNavigator;
+    GroupBoxPessoa: TGroupBox;
+    DBGridPessoa: TDBGrid;
+    GroupBox1: TGroupBox;
+    DBNavigatorEndereco: TDBNavigator;
+    DBGridEndereco: TDBGrid;
+    procedure FormResize(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  DataService_Impl;
+
+procedure TForm1.FormResize(Sender: TObject);
+const
+begin
+    If Self.WindowState = TWindowState.wsMinimized then
+        Exit;
+
+
+
+//      ssgItens.Left := 0;
+//      ssgItens.Top := 0;
+//      ssgItens.Width := Round(ClientWidth * LarguraPercentual);
+//      ssgItens.Height := Round(ClientHeight * AlturaPercentual);
+//
+//
+//      fraLegenda.Top := ssgItens.Top + ssgItens.Height + Round(ClientHeight * MargemPercentual);
+//      fraTotais.Top := fraLegenda.Top;
+
+end;
+
+end.

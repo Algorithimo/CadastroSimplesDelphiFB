@@ -1,0 +1,90 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  Caption = 'Cadastro de Pessoa'
+  ClientHeight = 533
+  ClientWidth = 731
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  WindowState = wsMaximized
+  OnResize = FormResize
+  TextHeight = 15
+  object DBNavigatorPessoa: TDBNavigator
+    AlignWithMargins = True
+    Left = 3
+    Top = 3
+    Width = 725
+    Height = 40
+    Align = alTop
+    TabOrder = 0
+  end
+  object GroupBoxPessoa: TGroupBox
+    AlignWithMargins = True
+    Left = 3
+    Top = 49
+    Width = 725
+    Height = 481
+    Align = alClient
+    Caption = 'Pessoa'
+    TabOrder = 1
+    ExplicitHeight = 150
+    object DBGridPessoa: TDBGrid
+      AlignWithMargins = True
+      Left = 5
+      Top = 20
+      Width = 715
+      Height = 200
+      Align = alTop
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -12
+      TitleFont.Name = 'Segoe UI'
+      TitleFont.Style = []
+    end
+    object GroupBox1: TGroupBox
+      AlignWithMargins = True
+      Left = 5
+      Top = 226
+      Width = 715
+      Height = 250
+      Align = alClient
+      Caption = 'Endere'#231'o'
+      TabOrder = 1
+      ExplicitLeft = 272
+      ExplicitTop = 192
+      ExplicitWidth = 185
+      ExplicitHeight = 105
+      object DBNavigatorEndereco: TDBNavigator
+        AlignWithMargins = True
+        Left = 5
+        Top = 20
+        Width = 705
+        Height = 40
+        Align = alTop
+        TabOrder = 0
+        ExplicitLeft = 10
+        ExplicitTop = 28
+      end
+      object DBGridEndereco: TDBGrid
+        AlignWithMargins = True
+        Left = 5
+        Top = 66
+        Width = 705
+        Height = 179
+        Align = alClient
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -12
+        TitleFont.Name = 'Segoe UI'
+        TitleFont.Style = []
+      end
+    end
+  end
+end
