@@ -53,7 +53,7 @@ object FormCadastro2: TFormCadastro2
         TabOrder = 0
         ExplicitWidth = 784
         object lbl_CadastroPessoa: TLabel
-          Left = 1
+          Left = 103
           Top = 1
           Width = 102
           Height = 76
@@ -66,27 +66,29 @@ object FormCadastro2: TFormCadastro2
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
+          ExplicitLeft = 1
           ExplicitHeight = 15
         end
         object Panel9: TPanel
-          Left = 576
+          Left = 488
           Top = 1
-          Width = 211
+          Width = 299
           Height = 76
           Align = alRight
           BevelOuter = bvNone
           Caption = 'Panel9'
           ShowCaption = False
           TabOrder = 0
-          ExplicitLeft = 572
           object BitBtnCancelar: TBitBtn
-            Left = 7
+            Left = 95
             Top = 0
             Width = 102
             Height = 76
             Align = alRight
             Cancel = True
             Caption = 'Cancelar'
+            Constraints.MinHeight = 40
+            Constraints.MinWidth = 80
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -21
@@ -94,15 +96,19 @@ object FormCadastro2: TFormCadastro2
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            OnClick = BitBtnCancelarClick
+            ExplicitLeft = 7
           end
           object BitBtnSalvar: TBitBtn
-            Left = 109
+            Left = 197
             Top = 0
             Width = 102
             Height = 76
             Align = alRight
             Cancel = True
             Caption = 'Salvar'
+            Constraints.MinHeight = 40
+            Constraints.MinWidth = 80
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -21
@@ -110,20 +116,40 @@ object FormCadastro2: TFormCadastro2
             Font.Style = []
             ParentFont = False
             TabOrder = 1
+            OnClick = BitBtnSalvarClick
+            ExplicitLeft = 109
           end
+        end
+        object BitBtnVoltar: TBitBtn
+          Left = 1
+          Top = 1
+          Width = 102
+          Height = 76
+          Align = alLeft
+          Cancel = True
+          Caption = 'Voltar'
+          Constraints.MinHeight = 40
+          Constraints.MinWidth = 80
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -21
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          OnClick = BitBtnVoltarClick
+          ExplicitLeft = -41
         end
       end
       object Panel1: TPanel
-        Left = 0
-        Top = 78
-        Width = 788
+        Left = 336
+        Top = 438
+        Width = 784
         Height = 171
-        Align = alTop
         Caption = 'Panel1'
+        Enabled = False
         TabOrder = 1
         Visible = False
-        ExplicitLeft = -32
-        ExplicitTop = 62
         object Button1: TButton
           Left = 464
           Top = 88
@@ -151,13 +177,13 @@ object FormCadastro2: TFormCadastro2
       end
       object Panel7: TPanel
         Left = 0
-        Top = 249
+        Top = 78
         Width = 788
         Height = 101
         Align = alTop
-        Enabled = False
         ShowCaption = False
         TabOrder = 2
+        ExplicitTop = 249
         ExplicitWidth = 784
         object Panel8: TPanel
           Left = 1
@@ -173,6 +199,7 @@ object FormCadastro2: TFormCadastro2
             Width = 198
             Height = 15
             Align = alTop
+            Alignment = taCenter
             Caption = 'C'#243'digo'
             ExplicitWidth = 39
           end
@@ -184,10 +211,10 @@ object FormCadastro2: TFormCadastro2
             Align = alClient
             DataField = 'ID_PESSOA'
             DataSource = DataService.dsPessoa
+            Enabled = False
             ReadOnly = True
             TabOrder = 0
-            ExplicitLeft = 2
-            ExplicitTop = 22
+            ExplicitHeight = 23
           end
         end
         object Panel10: TPanel
@@ -205,7 +232,6 @@ object FormCadastro2: TFormCadastro2
             Height = 15
             Align = alTop
             Caption = 'CPF/CNPJ'
-            FocusControl = DBEditCPFeCPNJ
             ExplicitWidth = 53
           end
           object DBEditCPFeCPNJ: TDBEdit
@@ -217,6 +243,8 @@ object FormCadastro2: TFormCadastro2
             DataField = 'NUM_CPF_CNPJ'
             DataSource = DataService.dsPessoa
             TabOrder = 0
+            ExplicitLeft = 2
+            ExplicitTop = 76
             ExplicitHeight = 23
           end
         end
@@ -234,6 +262,7 @@ object FormCadastro2: TFormCadastro2
             Width = 47
             Height = 15
             Align = alTop
+            Alignment = taCenter
             Caption = 'Tipo'
             FocusControl = DBEditTipoPessoa
             ExplicitWidth = 23
@@ -282,11 +311,11 @@ object FormCadastro2: TFormCadastro2
         end
       end
       object cxGridteste: TcxGrid
-        Left = 0
-        Top = 350
-        Width = 788
-        Height = 212
-        Align = alClient
+        Left = -31
+        Top = 412
+        Width = 432
+        Height = 211
+        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
@@ -294,19 +323,25 @@ object FormCadastro2: TFormCadastro2
         Font.Style = []
         ParentFont = False
         TabOrder = 3
+        Visible = False
         LookAndFeel.NativeStyle = True
         LookAndFeel.ScrollbarMode = sbmDefault
         LookAndFeel.SkinName = 'Office2007Blue'
-        ExplicitLeft = 2
-        ExplicitTop = 355
         object cxGridtesteDBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           ScrollbarAnnotations.CustomAnnotations = <>
+          OnCustomDrawCell = cxGridtesteDBTableView1CustomDrawCell
           DataController.DataSource = DataService.dsPessoa
           DataController.KeyFieldNames = 'ID_PESSOA'
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
+          OptionsData.Editing = False
+          OptionsSelection.CellSelect = False
+          OptionsView.GridLines = glVertical
+          RowLayout.OnCustomDrawRowSelection = cxGridtesteDBTableView1RowLayoutCustomDrawRowSelection
+          Styles.UseOddEvenStyles = bTrue
+          Styles.Selection = cxStyle1
           object cxGridtesteDBTableView1Column1: TcxGridDBColumn
             DataBinding.FieldName = 'ID_PESSOA'
             HeaderAlignmentHorz = taCenter
@@ -329,6 +364,147 @@ object FormCadastro2: TFormCadastro2
         object cxGridtesteLevel1: TcxGridLevel
           GridView = cxGridtesteDBTableView1
           MaxDetailHeight = 50
+        end
+      end
+      object Panel13: TPanel
+        Left = 0
+        Top = 179
+        Width = 788
+        Height = 101
+        Align = alTop
+        ShowCaption = False
+        TabOrder = 4
+        ExplicitLeft = -1
+        ExplicitTop = 180
+        object Panel14: TPanel
+          Left = 1
+          Top = 1
+          Width = 200
+          Height = 99
+          Caption = 'Panel8'
+          ShowCaption = False
+          TabOrder = 0
+          object lbl_CEP: TLabel
+            Left = 1
+            Top = 1
+            Width = 198
+            Height = 15
+            Align = alTop
+            Alignment = taCenter
+            Caption = 'CEP'
+            ExplicitWidth = 21
+          end
+          object DBEditCEP: TDBEdit
+            Left = 1
+            Top = 16
+            Width = 198
+            Height = 82
+            Align = alClient
+            DataField = 'NUM_CEP'
+            DataSource = DataService.dsEndereco
+            TabOrder = 0
+            ExplicitLeft = 88
+            ExplicitTop = 56
+            ExplicitWidth = 229
+            ExplicitHeight = 23
+          end
+        end
+        object Panel15: TPanel
+          Left = 206
+          Top = 1
+          Width = 185
+          Height = 99
+          Caption = 'Panel10'
+          ShowCaption = False
+          TabOrder = 1
+          object lbl_NomEndereco: TLabel
+            Left = 1
+            Top = 1
+            Width = 183
+            Height = 15
+            Align = alTop
+            Caption = 'Endere'#231'o'
+            ExplicitWidth = 49
+          end
+          object DBEditNomEndereco: TDBEdit
+            Left = 1
+            Top = 16
+            Width = 183
+            Height = 82
+            Align = alClient
+            DataField = 'NOM_ENDERECO'
+            DataSource = DataService.dsEndereco
+            TabOrder = 0
+            ExplicitLeft = 80
+            ExplicitTop = 69
+            ExplicitWidth = 1504
+            ExplicitHeight = 23
+          end
+        end
+        object Panel16: TPanel
+          Left = 612
+          Top = 6
+          Width = 49
+          Height = 97
+          Caption = 'Panel11'
+          ShowCaption = False
+          TabOrder = 2
+          object lbl_CodUF: TLabel
+            Left = 1
+            Top = 1
+            Width = 47
+            Height = 15
+            Align = alTop
+            Alignment = taCenter
+            Caption = 'UF'
+            ExplicitWidth = 14
+          end
+          object DBEditUF: TDBEdit
+            Left = 1
+            Top = 16
+            Width = 47
+            Height = 80
+            Align = alClient
+            DataField = 'COD_UF'
+            DataSource = DataService.dsEndereco
+            TabOrder = 0
+            ExplicitLeft = 16
+            ExplicitTop = 45
+            ExplicitWidth = 34
+            ExplicitHeight = 23
+          end
+        end
+        object Panel17: TPanel
+          Left = 397
+          Top = 2
+          Width = 185
+          Height = 97
+          Caption = 'Panel12'
+          ShowCaption = False
+          TabOrder = 3
+          object lbl_NomBairro: TLabel
+            Left = 1
+            Top = 1
+            Width = 183
+            Height = 15
+            Align = alTop
+            Caption = 'Bairro'
+            ExplicitWidth = 31
+          end
+          object DBEditNomBairro: TDBEdit
+            Left = 1
+            Top = 16
+            Width = 183
+            Height = 80
+            Align = alClient
+            DataField = 'NOM_BAIRRO'
+            DataSource = DataService.dsEndereco
+            TabOrder = 0
+            ExplicitLeft = 80
+            ExplicitTop = 72
+            ExplicitWidth = 1504
+            ExplicitHeight = 23
+          end
         end
       end
     end
@@ -364,6 +540,80 @@ object FormCadastro2: TFormCadastro2
           ParentFont = False
           Layout = tlCenter
           ExplicitHeight = 21
+        end
+        object Panel2: TPanel
+          Left = 457
+          Top = 0
+          Width = 331
+          Height = 78
+          Align = alRight
+          BevelOuter = bvNone
+          Caption = 'Panel2'
+          TabOrder = 0
+          ExplicitLeft = 456
+          ExplicitTop = 1
+          ExplicitHeight = 65
+          object BitBtnEditar: TBitBtn
+            Left = 125
+            Top = 0
+            Width = 102
+            Height = 78
+            Align = alRight
+            Cancel = True
+            Caption = 'Editar'
+            Constraints.MinHeight = 40
+            Constraints.MinWidth = 80
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -21
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 0
+            OnClick = BitBtnEditarClick
+          end
+          object BitBtnExcluir: TBitBtn
+            Left = 227
+            Top = 0
+            Width = 104
+            Height = 78
+            Align = alRight
+            Anchors = [akRight]
+            BiDiMode = bdLeftToRight
+            Cancel = True
+            Caption = 'Excluir'
+            Constraints.MinHeight = 40
+            Constraints.MinWidth = 80
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -21
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentBiDiMode = False
+            ParentFont = False
+            TabOrder = 1
+            OnClick = BitBtnExcluirClick
+          end
+          object BitBtnNovo: TBitBtn
+            Left = 45
+            Top = 0
+            Width = 80
+            Height = 78
+            Align = alRight
+            Cancel = True
+            Caption = 'Novo'
+            Constraints.MinHeight = 40
+            Constraints.MinWidth = 80
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -21
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 2
+            OnClick = BitBtnNovoClick
+            ExplicitLeft = -15
+          end
         end
       end
       object Panel5: TPanel
@@ -427,69 +677,6 @@ object FormCadastro2: TFormCadastro2
             TabOrder = 1
           end
         end
-        object Panel2: TPanel
-          Left = 456
-          Top = 1
-          Width = 331
-          Height = 65
-          Align = alRight
-          BevelOuter = bvNone
-          Caption = 'Panel2'
-          TabOrder = 1
-          object BitBtnEditar: TBitBtn
-            Left = 125
-            Top = 0
-            Width = 102
-            Height = 65
-            Align = alRight
-            Cancel = True
-            Caption = 'Editar'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -21
-            Font.Name = 'Segoe UI'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 0
-            OnClick = BitBtnEditarClick
-          end
-          object BitBtnExcluir: TBitBtn
-            Left = 227
-            Top = 0
-            Width = 104
-            Height = 65
-            Align = alRight
-            Anchors = [akRight]
-            BiDiMode = bdLeftToRight
-            Cancel = True
-            Caption = 'Excluir'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -21
-            Font.Name = 'Segoe UI'
-            Font.Style = []
-            ParentBiDiMode = False
-            ParentFont = False
-            TabOrder = 1
-          end
-          object BitBtnNovo: TBitBtn
-            Left = 23
-            Top = 0
-            Width = 102
-            Height = 65
-            Align = alRight
-            Cancel = True
-            Caption = 'Novo'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -21
-            Font.Name = 'Segoe UI'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 2
-            OnClick = BitBtnNovoClick
-          end
-        end
       end
       object DBGridPessoa: TDBGrid
         AlignWithMargins = True
@@ -499,7 +686,7 @@ object FormCadastro2: TFormCadastro2
         Height = 134
         Align = alClient
         BorderStyle = bsNone
-        Ctl3D = False
+        Ctl3D = True
         DataSource = DataService.dsPessoa
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -658,6 +845,14 @@ object FormCadastro2: TFormCadastro2
             Visible = True
           end>
       end
+    end
+  end
+  object cxStyleRepository1: TcxStyleRepository
+    PixelsPerInch = 96
+    object cxStyle1: TcxStyle
+      AssignedValues = [svColor, svTextColor]
+      Color = clBlue
+      TextColor = clWhite
     end
   end
 end

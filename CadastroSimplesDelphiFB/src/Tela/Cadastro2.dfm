@@ -66,7 +66,6 @@ object FormCadastro2: TFormCadastro2
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitLeft = 1
           ExplicitHeight = 15
         end
         object Panel9: TPanel
@@ -79,6 +78,7 @@ object FormCadastro2: TFormCadastro2
           Caption = 'Panel9'
           ShowCaption = False
           TabOrder = 0
+          ExplicitLeft = 484
           object BitBtnCancelar: TBitBtn
             Left = 95
             Top = 0
@@ -97,7 +97,6 @@ object FormCadastro2: TFormCadastro2
             ParentFont = False
             TabOrder = 0
             OnClick = BitBtnCancelarClick
-            ExplicitLeft = 7
           end
           object BitBtnSalvar: TBitBtn
             Left = 197
@@ -117,7 +116,6 @@ object FormCadastro2: TFormCadastro2
             ParentFont = False
             TabOrder = 1
             OnClick = BitBtnSalvarClick
-            ExplicitLeft = 109
           end
         end
         object BitBtnVoltar: TBitBtn
@@ -138,7 +136,6 @@ object FormCadastro2: TFormCadastro2
           ParentFont = False
           TabOrder = 1
           OnClick = BitBtnVoltarClick
-          ExplicitLeft = -41
         end
       end
       object Panel1: TPanel
@@ -183,7 +180,6 @@ object FormCadastro2: TFormCadastro2
         Align = alTop
         ShowCaption = False
         TabOrder = 2
-        ExplicitTop = 249
         ExplicitWidth = 784
         object Panel8: TPanel
           Left = 1
@@ -243,8 +239,6 @@ object FormCadastro2: TFormCadastro2
             DataField = 'NUM_CPF_CNPJ'
             DataSource = DataService.dsPessoa
             TabOrder = 0
-            ExplicitLeft = 2
-            ExplicitTop = 76
             ExplicitHeight = 23
           end
         end
@@ -374,8 +368,7 @@ object FormCadastro2: TFormCadastro2
         Align = alTop
         ShowCaption = False
         TabOrder = 4
-        ExplicitLeft = -1
-        ExplicitTop = 180
+        ExplicitWidth = 784
         object Panel14: TPanel
           Left = 1
           Top = 1
@@ -403,9 +396,6 @@ object FormCadastro2: TFormCadastro2
             DataField = 'NUM_CEP'
             DataSource = DataService.dsEndereco
             TabOrder = 0
-            ExplicitLeft = 88
-            ExplicitTop = 56
-            ExplicitWidth = 229
             ExplicitHeight = 23
           end
         end
@@ -435,9 +425,6 @@ object FormCadastro2: TFormCadastro2
             DataField = 'NOM_ENDERECO'
             DataSource = DataService.dsEndereco
             TabOrder = 0
-            ExplicitLeft = 80
-            ExplicitTop = 69
-            ExplicitWidth = 1504
             ExplicitHeight = 23
           end
         end
@@ -468,9 +455,6 @@ object FormCadastro2: TFormCadastro2
             DataField = 'COD_UF'
             DataSource = DataService.dsEndereco
             TabOrder = 0
-            ExplicitLeft = 16
-            ExplicitTop = 45
-            ExplicitWidth = 34
             ExplicitHeight = 23
           end
         end
@@ -500,9 +484,6 @@ object FormCadastro2: TFormCadastro2
             DataField = 'NOM_BAIRRO'
             DataSource = DataService.dsEndereco
             TabOrder = 0
-            ExplicitLeft = 80
-            ExplicitTop = 72
-            ExplicitWidth = 1504
             ExplicitHeight = 23
           end
         end
@@ -529,7 +510,7 @@ object FormCadastro2: TFormCadastro2
           Left = 0
           Top = 0
           Width = 94
-          Height = 78
+          Height = 21
           Align = alLeft
           Caption = 'Tabela Pessoa'
           Font.Charset = DEFAULT_CHARSET
@@ -539,7 +520,6 @@ object FormCadastro2: TFormCadastro2
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitHeight = 21
         end
         object Panel2: TPanel
           Left = 457

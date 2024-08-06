@@ -120,6 +120,7 @@ type
     { Private declarations }
     procedure AdjustLayout;
     procedure AdjustFontSizes;
+    procedure AdjustFontSizes2;
     procedure AdjustLabelPosition;
     procedure SetMargins;
     procedure DimensionarGrid(dbg: TDBGrid);
@@ -209,6 +210,21 @@ begin
 
 
   cxGridteste.Font.Size := Round(NewFontSize * 1);
+end;
+
+procedure TFormCadastro2.AdjustFontSizes2;
+const
+  BaseFontSize = 12; // Tamanho da fonte base
+  FontSizePercent = 0.02;
+  // Percentual da largura do formulário para o tamanho da fonte
+var
+  NewFontSize: Integer;
+begin
+  // Calcular o novo tamanho da fonte com base na largura do formulário
+  NewFontSize := Round(ClientHeight * FontSizePercent);
+  // Garantir que o tamanho da fonte não fique menor que o tamanho base
+  if NewFontSize < BaseFontSize then
+    NewFontSize := BaseFontSize;
 end;
 
 procedure TFormCadastro2.AdjustLabelPosition;
@@ -324,17 +340,14 @@ begin
   // Verifique se o número de painéis e porcentagens são compatíveis
   if (Length(Panels) <> Length(Percentages)) or (Length(Panels) = 0) then
     Exit;
-
   // Calcule a largura e a altura dos painéis
   TotalWidth := AMasterPanel.ClientWidth;
   PanelHeight := AMasterPanel.ClientHeight;
   PanelSpacing := 0; // Defina o espaçamento entre os painéis, se necessário
-
   // Inicialize variáveis
   TotalPercent := 0;
   UsedWidth := 0;
   CurrentLeft := 0;
-
   // Calcule a largura e a posição de cada painel com base nas porcentagens
   for i := 0 to High(Panels) do
   begin
@@ -342,14 +355,11 @@ begin
     Panels[i].Height := PanelHeight;
     Panels[i].Left := CurrentLeft;
     Panels[i].Top := 0;
-
     // Calcule a largura do painel com base na porcentagem
     Panels[i].Width := TotalWidth * Percentages[i] div 100;
-
     UsedWidth := UsedWidth + Panels[i].Width;
     CurrentLeft := CurrentLeft + Panels[i].Width + PanelSpacing;
   end;
-
   // Ajuste o painel mestre para conter todos os painéis (opcional)
   if UsedWidth < TotalWidth then
     AMasterPanel.Width := UsedWidth
